@@ -1,17 +1,53 @@
 import { useSelector } from 'react-redux'
 
-import Contact from '../../components/Contact'
-import { Aside } from '../../styles'
-import { TotalContacts } from './style'
-
 import { RootReducer } from '../../store'
 
-const ContactList = () => {
+import Contact from '../../components/Contact'
+import * as S from '../../styles'
+
+const ContactList = ({
+  onResultChange
+}: {
+  onResultChange: (result: string) => void
+}) => {
   const { itens } = useSelector((state: RootReducer) => state.contacts)
+  const { term } = useSelector((state: RootReducer) => state.filter)
+
+  const filterContacts = () => {
+    let contactsFilter = itens
+    if (term !== undefined) {
+      contactsFilter = contactsFilter.filter(
+        (item) =>
+          item.name
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .search(
+              term
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLocaleLowerCase()
+            ) >= 0
+      )
+    }
+    return contactsFilter
+  }
+
+  const displaysResultFiltering = (quantidade: number) => {
+    return itens !== undefined && itens.length > 0
+      ? `(${quantidade})`
+      : `(value)`
+  }
+
+  const contacts = filterContacts()
+  const mensagem = displaysResultFiltering(contacts.length)
+
+  onResultChange(mensagem)
+
   return (
-    <Aside home>
+    <S.Aside home>
       <ul>
-        {itens.map((c) => (
+        {filterContacts().map((c) => (
           <li key={c.telephone}>
             <Contact
               name={c.name}
@@ -22,7 +58,7 @@ const ContactList = () => {
           </li>
         ))}
       </ul>
-    </Aside>
+    </S.Aside>
   )
 }
 

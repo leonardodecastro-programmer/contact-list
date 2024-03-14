@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import Contact from '../../models/Contact'
 
 type ContactsState = {
@@ -6,32 +7,7 @@ type ContactsState = {
 }
 
 const initialState: ContactsState = {
-  itens: [
-    {
-      name: 'Heloísa',
-      telephone: '(15) 3553-8553',
-      email: 'heloisa@gmail.com',
-      id: 1
-    },
-    {
-      name: 'Carlos',
-      telephone: '(68) 3146-6733',
-      email: 'carlos@gmail.com',
-      id: 2
-    },
-    {
-      name: 'Eduarda',
-      telephone: '(13) 3535-5892',
-      email: 'eduarda@gmail.com',
-      id: 3
-    },
-    {
-      name: 'Julío',
-      telephone: '(63) 2362-3573',
-      email: 'julio@gmail.com',
-      id: 4
-    }
-  ]
+  itens: []
 }
 
 const contactsSlice = createSlice({

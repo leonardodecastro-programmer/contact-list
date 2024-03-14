@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { Button } from '../../styles'
-import { ButtonsContainer, ContactContainer, InfosContainer } from './styles'
 import { remove } from '../../store/reducers/contact'
 import ContactClass from '../../models/Contact'
+import * as S from '../../styles'
+import { ButtonsContainer, ContactContainer, InfosContainer } from './styles'
 
-type Props = ContactClass
-
-const Contact = ({ name, telephone, email, id }: Props) => {
+const Contact = ({ name, telephone, email, id }: ContactClass) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleEdit = () => {
@@ -25,16 +23,16 @@ const Contact = ({ name, telephone, email, id }: Props) => {
         </div>
       </InfosContainer>
       <ButtonsContainer>
-        <Button styleButton="edit" onClick={handleEdit}>
-          Editar
-        </Button>
-        <Button
+        <S.Button styleButton="edit" onClick={handleEdit}>
+          Edit
+        </S.Button>
+        <S.Button
           styleButton="edit"
           deleteOrCancel
           onClick={() => dispatch(remove(id))}
         >
-          Remover
-        </Button>
+          Remove
+        </S.Button>
       </ButtonsContainer>
     </ContactContainer>
   )

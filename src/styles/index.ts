@@ -1,14 +1,15 @@
 import styled, { createGlobalStyle } from 'styled-components'
+import InputMask from 'react-input-mask'
 
 import variables from './variables'
 
-type Props = {
+type ButtonType = {
   styleButton: 'add' | 'edit'
   deleteOrCancel?: boolean
   cofirm?: boolean
 }
 
-type Home = {
+type HomeType = {
   home?: boolean
 }
 
@@ -31,7 +32,7 @@ export const Container = styled.div`
 `
 
 export const MainContainer = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100%;
   max-width: 800px;
   display: flex;
@@ -40,16 +41,39 @@ export const MainContainer = styled.div`
   padding: 40px 20px;
 `
 
-export const Aside = styled.div<Home>`
-  margin: 40px 0;
-  height: 100%;
+export const Aside = styled.div<HomeType>`
+  margin: ${(props) => (props.home ? '24px 0' : 'auto')};
+  height: ${(props) => (props.home ? '100%' : '612px')};
   width: 100%;
   overflow-y: ${(props) => (props.home ? 'scroll' : 'none')};
-  border-top: solid 1px ${variables.darkGrey};
-  border-bottom: solid 1px ${variables.darkGrey};
+  border: ${(props) => (props.home ? '' : `solid 1px ${variables.darkGrey}`)};
+  border-radius: ${(props) => (props.home ? '' : '8px')};
+  border-top: ${(props) =>
+    props.home ? `solid 1px ${variables.darkGrey}` : ''};
+  border-bottom: ${(props) =>
+    props.home ? `solid 1px ${variables.darkGrey}` : ''};
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: solid 2px ${variables.darkGrey};
+    height: 10px;
+    width: 6px;
+    border-radius: 20px; /* roundness of the scroll thumb */
+  }
 `
 
-export const Button = styled.button<Props>`
+export const MainText = styled.h2`
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 28px;
+  text-align: center;
+  color: ${variables.grey};
+`
+
+export const Button = styled.button<ButtonType>`
   height: fit-content;
   background-color: transparent;
   padding: ${(props) =>
@@ -74,12 +98,29 @@ export const SaveButton = styled.button`
 `
 
 export const Field = styled.input`
-  width: 600px;
+  width: 100%;
   border-radius: 40px;
   padding: 10px 12px;
   color: #ffff;
   border: solid 2px ${variables.grey};
   background-color: ${variables.darkGrey};
+
+  @media (min-width: 768px) {
+    width: 600px;
+  }
+`
+
+export const MaskField = styled(InputMask)`
+  width: 100%;
+  border-radius: 40px;
+  padding: 10px 12px;
+  color: #ffff;
+  border: solid 2px ${variables.grey};
+  background-color: ${variables.darkGrey};
+
+  @media (min-width: 768px) {
+    width: 600px;
+  }
 `
 
 export default EstiloGlobal

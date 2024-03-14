@@ -1,8 +1,8 @@
-import FormEdit from '../../containers/FormEdit'
+import Form from '../../containers/Form'
 
 const Register = () => (
   <>
-    <FormEdit />
+    <Form formType="register" />
   </>
 )
 

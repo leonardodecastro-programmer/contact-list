@@ -4,11 +4,18 @@ import variables from '../../styles/variables'
 export const ContactContainer = styled.div`
   padding: 19px 8px;
   display: flex;
+  flex-direction: column;
+  gap: 20px;
   justify-content: space-between;
   align-items: center;
 
   &:not(:last-child) {
     border-bottom: solid 1px ${variables.darkGrey};
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 0;
   }
 `
 
