@@ -12,10 +12,18 @@ const Contact = ({ name, telephone, email, id }: ContactClass) => {
   const handleEdit = () => {
     navigate(`/edit/${id}`)
   }
+
+  function formatTelephoneNumber(telephone: string) {
+    const formattedTelephone = telephone.match(/\d/g)?.join('')
+    return formattedTelephone || telephone
+  }
+
   return (
     <ContactContainer>
       <InfosContainer>
-        <img src="person-circle.svg" />
+        <a href={`tel:${formatTelephoneNumber(telephone)}`}>
+          <img src="person-circle.svg" />
+        </a>
         <div>
           <h3>{name}</h3>
           <p>telephone: {telephone}</p>
